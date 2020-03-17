@@ -11,7 +11,7 @@ class Graph:
         Add a vertex to the graph.
         """
         if vertex_id not in self.vertices:
-            self.vertices[vertex_id] = set ()
+            self.vertices[vertex_id] = set()
 
     def add_edge(self, v1, v2):
         """
@@ -81,31 +81,30 @@ def earliest_ancestor(ancestors, starting_node):
     
     q = Queue()
     q.enqueue([starting_node])
-    v = set()
+    last_vertex = -1
 
     while q.size() > 0:
         path = q.dequeue()
-        print(path)
-        last_vertex = path[-1]
 
-        if len(path) > 1 and path[-2] < last_vertex:
-            last_vertex = path[-2]
+        # if something
+        v = path[-1]
+
+        if (v < last_vertex) or len(path) > 1:
+            last_vertex = v
+
+        for n in g.get_neighbors(v):
+            copy = path.copy()
+            copy.append(n)
+            q.enqueue(copy)
+
+    return last_vertex
+
+
+
         
-        if last_vertex not in v:
-            v.add(last_vertex)
-
-            if len(g.get_neighbors(last_vertex)) == 0:
-                return last_vertex
-
-            for n in g.get_neighbors(last_vertex): 
-                copy = path.copy()            
-                if not n in copy:
-                    copy.append(n)
-                q.enqueue(copy)
-    return -1
 
 ancestor_list = [(1, 3), (2, 3), (3, 6), (5, 6), (5, 7), (4, 5), (4, 8), (8, 9), (11, 8), (10, 1)]
-print(earliest_ancestor(ancestor_list, 1))
+print(earliest_ancestor(ancestor_list, 4))
 
 
 
