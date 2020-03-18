@@ -85,17 +85,21 @@ def earliest_ancestor(ancestors, starting_node):
 
     while q.size() > 0:
         path = q.dequeue()
+        print(f'path: {path}')
 
-        # if something
         v = path[-1]
+        print(f'v: {v}')
 
         if (v < last_vertex) or len(path) > 1:
             last_vertex = v
+        print(f'last_vertex:{last_vertex}')
 
         for n in g.get_neighbors(v):
+            print(f'n in loop: {n}')
             copy = path.copy()
             copy.append(n)
             q.enqueue(copy)
+            print(f'copy: {copy}')
 
     return last_vertex
 
@@ -104,7 +108,7 @@ def earliest_ancestor(ancestors, starting_node):
         
 
 ancestor_list = [(1, 3), (2, 3), (3, 6), (5, 6), (5, 7), (4, 5), (4, 8), (8, 9), (11, 8), (10, 1)]
-print(earliest_ancestor(ancestor_list, 4))
+print(earliest_ancestor(ancestor_list, 9))
 
 
 
