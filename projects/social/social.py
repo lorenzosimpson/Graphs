@@ -68,7 +68,44 @@ class SocialGraph:
             friendship = possible_friendships[i]
             self.add_friendship(friendship[0], friendship[1])
 
-      
+    def populate_graph_linear(self, num_users, avg_friendships):
+        # pick a random user
+        # pick another random user
+        # try to create the friendship
+        # if it works, increment a counter
+        # if not, try again
+
+        # Reset graph
+        self.last_id = 0
+        self.users = {}
+        self.friendships = {}
+        # TODO !!!! IMPLEMENT ME
+
+        # Add users
+        # write for loop that calls create user right amount of times
+        for i in range(num_users):
+            self.add_user(f'User {i + 1}')
+
+        total_friendships = 0
+        target_friendships = num_users * avg_friendships
+        collisions = 0
+
+        while total_friendships < target_friendships:
+            user_id = random.randint(1, num_users)
+            friend_id = random.randint(1, num_users)
+            # add friendship is valid:
+            if self.add_friendship(user_id, friend_id):
+                # increment frienships by 2
+                total_friendships += 2
+            else:
+                collisions += 1
+
+
+
+
+
+
+
 
     def get_all_social_paths(self, user_id):
         """
@@ -103,15 +140,17 @@ class SocialGraph:
         return visited
 
 
-            
-
-  
 
 if __name__ == '__main__':
     sg = SocialGraph()
-    sg.populate_graph(10, 2)
+    sg.populate_graph(1000, 5)
     print(sg.friendships)
     connections = sg.get_all_social_paths(1)
-    print('connections:', connections)
+    # print('connections:', connections)
+    print(len(connections) / 1000)
+    total = 0
+    for path in connections.values():
+        total += len(path)
+    print(f'average length= {total/len(connections)}')
 
 
