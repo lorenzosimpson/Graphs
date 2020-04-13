@@ -38,7 +38,22 @@ class Graph:
         Print each vertex in breadth-first order
         beginning from starting_vertex.
         """
-        pass  # TODO
+        q = Queue()
+        v = set()
+        q.enqueue([starting_vertex])
+        while q.size() > 0:
+            path = q.dequeue()
+            if path[-1] not in v:
+                # do stuff
+                print(path[-1])
+                v.add(path[-1])
+                for n in self.get_neighbors(path[-1]):
+                    path_copy = path.copy()
+                    path_copy.append(n)
+                    q.enqueue(path_copy)
+
+
+
 
     def dft(self, starting_vertex):
         """
