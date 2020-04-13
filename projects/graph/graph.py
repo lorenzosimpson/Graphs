@@ -52,24 +52,38 @@ class Graph:
                     path_copy.append(n)
                     q.enqueue(path_copy)
 
-
-
-
     def dft(self, starting_vertex):
         """
         Print each vertex in depth-first order
         beginning from starting_vertex.
         """
-        pass  # TODO
+        s = Stack()
+        v = set()
+        s.push(starting_vertex)
+        while s.size() > 0:
+            node = s.pop()
+            if node not in v:
+                print(node)
+                v.add(node)
+                for n in self.get_neighbors(node):
+                    s.push(n)
 
-    def dft_recursive(self, starting_vertex):
+
+    def dft_recursive(self, starting_vertex, visited=None):
         """
         Print each vertex in depth-first order
         beginning from starting_vertex.
 
         This should be done using recursion.
         """
-        pass  # TODO
+        # base case
+        if visited is None:
+            visited = set()
+        if starting_vertex not in visited:
+            print(starting_vertex)
+            visited.add(starting_vertex)
+            for n in self.get_neighbors(starting_vertex):
+                self.dft_recursive(n, visited)
 
     def bfs(self, starting_vertex, destination_vertex):
         """
