@@ -12,7 +12,8 @@ class Graph:
         """
         Add a vertex to the graph.
         """
-        self.vertices[vertex_id] = set()
+        if vertex_id not in self.vertices:
+            self.vertices[vertex_id] = set()
 
     def add_edge(self, v1, v2):
         """
@@ -21,7 +22,7 @@ class Graph:
         if v1 in self.vertices and v2 in self.vertices:
             self.vertices[v1].add(v2)
         else:
-            print('Error: vertex not found')
+            raise ValueError('vertex does not exist')
 
     def get_neighbors(self, vertex_id):
         """
@@ -31,8 +32,6 @@ class Graph:
             return self.vertices[vertex_id]
         else:
             return None
-
-
 
 
 def earliest_ancestor(ancestors, starting_node):
