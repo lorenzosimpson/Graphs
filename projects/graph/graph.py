@@ -117,6 +117,7 @@ class Graph:
         s.push([starting_vertex])
         while s.size() > 0:
             path = s.pop()
+            print(path)
             last_v = path[-1]
             if last_v not in v:
                 v.add(last_v)
@@ -149,7 +150,7 @@ class Graph:
         for n in self.get_neighbors(starting_vertex):
             if n not in visited:
                 x = self.dfs_recursive(n, destination_vertex, visited, path)
-                if x:
+                if x is not None:
                     return x
         
 
