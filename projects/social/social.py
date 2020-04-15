@@ -79,7 +79,7 @@ class SocialGraph:
                 failed += 1
 
         end_time = time.time()
-        print(f'Populate time: {end_time - start_time}')
+        print(f'Populate time: {end_time - start_time:.2f}')
         
         random.shuffle(possible_friendships)
 
@@ -119,7 +119,13 @@ if __name__ == '__main__':
     sg.populate_graph(1000, 5)
     #print(sg.friendships)
     connections = sg.get_all_social_paths(1)
-    #print(connections)
+    print(connections)
+    total = 0
+    for k in connections.values():
+        total += len(k)
+    avg_sep = total / len(connections)
+    print(f'Avg sepatation: {avg_sep:.2f}')
+
     print(f'Percentage of users in a users extended network: {len(connections) / len(sg.users) * 100}%')
 
 
